@@ -194,3 +194,57 @@ m[i][j] = min over all k of ( m[i][k] + m[k+1][j] + p[i-1]*p[k]*p[j] )
 The table is filled diagonal-by-diagonal, moving from short chains toward the full chain, since every cell depends on smaller sub-chains being solved first.
 
 ---
+
+# Complete Example
+
+## Example: Small MCM Run
+
+# Dimensions p = [10, 20, 30, 40] (3 matrices: A1(10x20), A2(20x30), A3(30x40))
+
+**Input:**
+3
+10 20 30 40
+
+**Two possible groupings:**
+
+| Order | Cost |
+|---|---|
+| `(A1 x A2) x A3` | 10×20×30 + 10×30×40 = 6000 + 12000 = **18000** |
+| `A1 x (A2 x A3)` | 20×30×40 + 10×20×40 = 24000 + 8000 = 32000 |
+
+**Output:**
+Minimum Cost: 18000
+
+**Explanation:** Grouping `(A1 x A2) x A3` needs fewer total scalar multiplications, so the algorithm picks that split.
+
+---
+
+# Time & Space Complexity
+
+| Operation | Complexity |
+|---|---|
+| Filling the DP tables | O(n³) |
+| Reading final answer | O(1) |
+| Space used (two 2D tables) | O(n²) |
+
+**Note:** Naive recursive solution without DP grows with the Catalan number (exponential). DP brings it down to `O(n³)` — polynomial.
+
+---
+
+# Important Notes
+
+1. **1-Indexed Arrays:** Matrices are numbered `A1` to `An`, and `p[]` has `n+1` entries
+2. **Bottom-Up by Chain Length:** The outer loop `d` ensures smaller sub-chains are always solved before bigger ones need them
+3. **Optimal Substructure:** The best split of a chain depends only on the best splits of its two parts
+4. **Overlapping Subproblems:** The same sub-chain `(i, j)` is reused across many larger chains — hence storing it in `m[][]`
+5. **Cost Only, Not the Product:** This code computes the minimum multiplication cost, not the actual resulting matrix. Getting the actual parenthesization requires recursively reading `s[][]`
+
+---
+
+# Common Mistakes to Avoid
+
+1. ❌ Forgetting `m[i][j] = 0` when `i == j` — this breaks every larger chain calculation built on top of it
+2. ❌ Not initializing non-diagonal cells to a large value (infinity) before taking the minimum
+3. ❌ Looping `i` and `j` directly instead of looping by chain length `d` — this can access cells that aren't filled yet
+4. ❌ Using wrong dimension indices in `p[i-1]*p[k]*p[j]` — this is the most common source of wrong answers
+5. ❌ Forgetting that `p[]` needs `n+1` values for `n` matrices, not `n`
