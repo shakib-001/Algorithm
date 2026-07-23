@@ -204,3 +204,37 @@ A B C
 A C
 **Output:**
 LCS Length: 2
+
+**Explanation:** `A` matches at position 1, and `C` matches later — giving subsequence `"AC"`, length 2.
+
+---
+
+# Time & Space Complexity
+
+| Operation | Complexity |
+|---|---|
+| Filling the DP table | O(m × n) |
+| Reading final answer | O(1) |
+| Space used (2D table) | O(m × n) |
+
+**Note:** Naive recursive solution without DP takes `O(2^min(m,n))` — exponential. DP brings it down to `O(m × n)` — polynomial.
+
+---
+
+# Important Notes
+
+1. **1-Indexed Arrays:** Strings and the table use 1-based indexing so `i==0`/`j==0` cleanly represents an empty prefix
+2. **Bottom-Up Only:** No recursion — the table fills iteratively, row by row
+3. **Optimal Substructure:** LCS of full strings is built from LCS of their prefixes
+4. **Overlapping Subproblems:** The same `(i, j)` pair is needed from multiple paths — storing it avoids recomputation
+5. **Only Length, Not the String:** This code computes LCS length only. To get the actual subsequence, backtrack from `c[m][n]`: move diagonally on a match, otherwise move toward whichever of `c[i-1][j]` / `c[i][j-1]` is larger
+
+---
+
+# Common Mistakes to Avoid
+
+1. ❌ Forgetting the base case (`i==0 || j==0`) — first row/column must be 0
+2. ❌ Comparing `x[i]` with `y[j]` using wrong indices (off-by-one between 0-indexed and 1-indexed arrays)
+3. ❌ Using `min()` instead of `max()` in the mismatch case — this would give the wrong (smaller) answer
+4. ❌ Confusing "subsequence" with "substring" — LCS does not need contiguous characters
+5. ❌ Assuming there's only one valid LCS — multiple different subsequences can share the same maximum length
