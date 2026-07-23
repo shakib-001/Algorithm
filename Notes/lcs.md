@@ -185,3 +185,22 @@ Diagonal moves in the table represent matched characters; horizontal/vertical mo
 # Complete Example
 
 ## Example: Small LCS Run
+
+x = "ABC"
+y = "AC"
+
+**Table:**
+
+| | 0 | A | C |
+|---|---|---|---|
+| **0** | 0 | 0 | 0 |
+| **A** | 0 | 1 | 1 |
+| **B** | 0 | 1 | 1 |
+| **C** | 0 | 1 | 2 |
+
+**Input:**
+3 2
+A B C
+A C
+**Output:**
+LCS Length: 2
