@@ -182,3 +182,5 @@ Every cell only depends on the **row above it** (`i-1`), meaning the table is bu
 ---
 
 # Complete Example
+
+## Example: Small Knapsack Run
