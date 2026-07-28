@@ -194,3 +194,6 @@ Capacity (m): 4
 4
 1 4 5 7
 1 2 4 5
+
+**Output:**
+Maximum Profit: 5
