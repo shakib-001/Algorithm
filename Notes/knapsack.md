@@ -197,3 +197,37 @@ Capacity (m): 4
 
 **Output:**
 Maximum Profit: 5
+
+**Explanation:** Item 1 + Item 2 → weight = 1+2 = 3 (≤4), profit = 1+4 = 5. Item 3 alone also gives weight 4, profit 5. Both give the same maximum profit of 5.
+
+---
+
+# Time & Space Complexity
+
+| Operation | Complexity |
+|---|---|
+| Filling the DP table | O(n × m) |
+| Reading final answer | O(1) |
+| Space used (2D table) | O(n × m) |
+
+**Note:** Naive recursive solution without DP takes `O(2^n)` — exponential. DP brings it down to `O(n × m)` — polynomial.
+
+---
+
+# Important Notes
+
+1. **1-Indexed Arrays:** `p[]`, `wt[]`, and the table are used with 1-based indexing to keep base case (`i==0`) clean
+2. **Bottom-Up Only:** No recursion used here — the table is filled iteratively, row by row
+3. **Optimal Substructure:** The best answer for `n` items is built from the best answers for fewer items
+4. **Overlapping Subproblems:** The same `(i, w)` states are reused many times — that's exactly why we store them in a table instead of recomputing
+5. **Space Can Be Optimized:** Since `k[i][w]` only depends on row `i-1`, this can be reduced to a 1D array — here it's kept 2D for clarity
+
+---
+
+# Common Mistakes to Avoid
+
+1. ❌ Forgetting the base case (`i==0 || w==0`) — the whole table depends on it
+2. ❌ Checking `wt[i] <= w` incorrectly (using `<` instead of `<=`) — off-by-one errors change the answer
+3. ❌ Mixing up rows and columns while reading the table (`i` = items, `w` = capacity)
+4. ❌ Assuming items can be split — this is strictly 0/1, not Fractional Knapsack
+5. ❌ Not initializing arrays with `n+1` / `m+1` size — causes out-of-bound access since indexing starts at 1
