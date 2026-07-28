@@ -184,3 +184,13 @@ Every cell only depends on the **row above it** (`i-1`), meaning the table is bu
 # Complete Example
 
 ## Example: Small Knapsack Run
+
+Items: 1 2 3 4
+Profit: 1 4 5 7
+Weight: 1 2 4 5
+Capacity (m): 4
+**Input:**
+4
+4
+1 4 5 7
+1 2 4 5
