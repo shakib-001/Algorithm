@@ -214,7 +214,7 @@ Maximum Profit: 5
 
 ---
 
-# Important Notes
+# IMPORTANT NOTES
 
 1. **1-Indexed Arrays:** `p[]`, `wt[]`, and the table are used with 1-based indexing to keep base case (`i==0`) clean
 2. **Bottom-Up Only:** No recursion used here — the table is filled iteratively, row by row
@@ -223,7 +223,6 @@ Maximum Profit: 5
 5. **Space Can Be Optimized:** Since `k[i][w]` only depends on row `i-1`, this can be reduced to a 1D array — here it's kept 2D for clarity
 
 ---
-
 # Common Mistakes to Avoid
 
 1. ❌ Forgetting the base case (`i==0 || w==0`) — the whole table depends on it
