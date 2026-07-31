@@ -15,6 +15,7 @@
 # Introduction to MCM
 
 ## What is Matrix Chain Multiplication?
+
 **A problem of finding the cheapest order (parenthesization) to multiply a chain of matrices, without actually changing the final result.**
 
 ```cpp
@@ -52,7 +53,7 @@ int s[n+1][n+1];    // split table: best k to break the chain at
 **Build the table by chain length — solve small chains first, then use them to solve bigger chains**
 
 ```cpp
-for (int d = 1; d <= n - 1; d++) {              // chain length
+for (int d = 1; d <= n - 1; d++) {           
     for (int i = 1; i <= n - d; i++) {
         int j = i + d;
         int minVal = 1e9;
